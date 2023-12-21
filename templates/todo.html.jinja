@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My ToDo</title>
+        <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-family: 'Georgia', serif;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+    </head>
+
+    <body>
+        <h1>Welcome To My ToDo List</h1>
+        <ul>
+            {%for todo in ToDos%}
+                    <li>{{todo}}</li>
+            {%endfor%}
+        </ul>
+        <form method="post">
+            <input name = "new_todo">     
+            <input type="submit" class = "submit">
+        </form>
+    </body>
+</html>
