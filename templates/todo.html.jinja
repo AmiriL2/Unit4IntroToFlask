@@ -31,6 +31,51 @@
             font-weight: bold;
             text-align: center;
         }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .submit {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 5px;
+            color: #fff;
+            background-color: #3498db;
+            border: 2px solid #3498db;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        
+        .submit:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+        }
+
+        .fancy-input-button {
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 5px;
+            color: black;
+            background-color: white;
+            border: 2px solid grey;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .hidden-input {
+            display: none;
+        }
+
     </style>
     </head>
 
@@ -38,12 +83,19 @@
         <h1>Welcome To My ToDo List</h1>
         <ul>
             {%for todo in ToDos%}
-                    <li>{{todo}}</li>
+                    <li>
+                        {{todo}}
+                        <form method="POST" action="/delete_todo/{{loop.index0}}">
+                            <input type="submit" value="Delete">
+                        </form>
+                    </li>
             {%endfor%}
         </ul>
         <form method="post">
-            <input name = "new_todo">     
-            <input type="submit" class = "submit">
+            <input name = "new_todo" class="fancy-input-button">
+            <div class="button-container">
+                <input type="submit" class="submit">
+            </div>
         </form>
     </body>
 </html>

@@ -5,13 +5,19 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "node",
+            "name": "Python: Flask",
+            "type": "python",
             "request": "launch",
-            "name": "Launch Program",
-            "skipFiles": [
-                "<node_internals>/**"
+            "module": "flask",
+            "env": {
+                "FLASK_APP": "todo.py",
+                "FLASK_DEBUG": "1"
+            },
+            "args": [
+                "run"
             ],
-            "program": "${file}"
+            "jinja": true,
+            "justMyCode": true
         }
     ]
 }
