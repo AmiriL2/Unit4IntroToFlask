@@ -10,13 +10,6 @@ connect = pymysql.connect(
     host="10.100.33.60",
     cursorclass=pymysql.cursors.DictCursor
 )
-Cursor = connect.cursor()
-
-Cursor.execute("SELECT `description` FROM `todos`")
-
-results = Cursor.fetchall()
-
-ToDos = results
 
 app = Flask(__name__)
 
@@ -24,11 +17,23 @@ app = Flask(__name__)
 def index():
       if request.method == 'POST':
             new_todo = request.form["new_todo"]
-            ToDos.append(new_todo)
-      return render_template("todo.html.jinja", ToDos=ToDos)
+            Cursor = connect.cursor()
+            Cursor.execute(f"INSERT INTO `todos` (`description`) VALUES ('{new_todo}') ")
+            Cursor.close()
+            connect.commit()
+      Cursor = connect.cursor()
+
+      Cursor.execute("SELECT * FROM `todos`")
+
+      results = Cursor.fetchall()
+      Cursor.close()
+      return render_template("todo.html.jinja", ToDos=results)
 
 @app.route('/delete_todo/<int:todo_index>', methods=['POST'])
 def todo_delete(todo_index):
-      del ToDos[todo_index]
+      Cursor = connect.cursor()
+      Cursor.execute(f"DELETE FROM `todos` WHERE `id`= {todo_index}")
+      Cursor.close()
+      connect.commit()
       return redirect('/')
 

@@ -84,8 +84,8 @@
         <ul>
             {%for todo in ToDos%}
                     <li>
-                        {{todo}}
-                        <form method="POST" action="/delete_todo/{{loop.index0}}">
+                        {{todo['description']}}
+                        <form method="POST" action="/delete_todo/{{todo['id']}}">
                             <input type="submit" value="Delete">
                         </form>
                     </li>
