@@ -32,6 +32,10 @@
             text-align: center;
         }
 
+        .button {
+            display: flex;
+            justify-content: right;
+        }
         .button-container {
             text-align: center;
             margin-top: 20px;
@@ -75,7 +79,60 @@
         .hidden-input {
             display: none;
         }
+        .complete {
+            text-decoration: line-through;
+            font-style: italic;
+        }
+        .green-button {
+        background-color: green;
+        color: white;
+        padding: 10px 20px; 
+        border-radius: 5px;
+        font-size: 16px;
+        justify-content: center;
+        outline: none;
+        padding-left: 10px;
+          margin-right: 10px;
+        }
 
+        .red-button {
+        background-color: red;
+        color: white;
+        padding: 10px 20px; 
+        border-radius: 5px;
+        font-size: 16px;
+        align-items: center;
+        outline: none;
+        margin-right: 10px;
+        }
+
+        .orange-button {
+        background-color: rgb(237, 101, 4);
+        color: white;
+        padding: 10px 20px; 
+        border-radius: 5px;
+        font-size: 16px;
+        align-items: center;
+        outline: none;
+        padding-left: 10px;
+        margin-right: 10px;
+        }
+
+        .green-button:hover{
+            background-color: rgb(3, 101, 3);
+            transition: 0.3s; 
+            transform: translate(2px, -2px);
+        }
+        .orange-button:hover{
+            background-color: rgb(165, 70, 3);
+            transition: 0.3s; 
+            transform: translate(2px, -2px);
+        }
+        .red-button:hover{
+            background-color: rgb(181, 1, 1);
+            transition: 0.3s; 
+            transform: translate(2px, -2px);
+        }
     </style>
     </head>
 
@@ -83,12 +140,27 @@
         <h1>Welcome To My ToDo List</h1>
         <ul>
             {%for todo in ToDos%}
-                    <li>
+                    <li class="{%if todo['complete']%}complete{%endif%}">
                         {{todo['description']}}
+                <div class="button">
+
                         <form method="POST" action="/delete_todo/{{todo['id']}}">
-                            <input type="submit" value="Delete">
+                            <input type="submit" value="Delete" class="red-button">
                         </form>
-                    </li>
+
+                         {%if todo['complete'] == 0 %}
+                        <form method="POST" action="/complete_todo/{{todo['id']}}">
+                            <input type="submit" value="Mark Complete" class="green-button">
+                        </form>
+                        {%endif%}
+
+                        {%if todo['complete'] == 1 %}
+                        <form method="POST" action="/uncomplete_todo/{{todo['id']}}">
+                            <input type="submit" value="Uncomplete" class="orange-button">
+                        </form>
+                        {%endif%}
+                </div>
+                        {%if todo['complete'] %}{%endif%}
             {%endfor%}
         </ul>
         <form method="post">
