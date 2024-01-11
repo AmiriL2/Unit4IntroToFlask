@@ -37,8 +37,9 @@
             justify-content: right;
         }
         .button-container {
-            text-align: center;
+            text-align: left;
             margin-top: 20px;
+
         }
 
         .submit {
@@ -133,11 +134,14 @@
             transition: 0.3s; 
             transform: translate(2px, -2px);
         }
+        .complete{
+            background-color: #aaf8ad;
+        }
     </style>
     </head>
 
     <body>
-        <h1>Welcome To My ToDo List</h1>
+        <h1>WToDo List</h1>
         <ul>
             {%for todo in ToDos%}
                     <li class="{%if todo['complete']%}complete{%endif%}">
@@ -150,12 +154,12 @@
 
                          {%if todo['complete'] == 0 %}
                         <form method="POST" action="/complete_todo/{{todo['id']}}">
-                            <input type="submit" value="Mark Complete" class="green-button">
+                            <input type="submit" value="Completed" class="green-button">
                         </form>
                         {%endif%}
 
                         {%if todo['complete'] == 1 %}
-                        <form method="POST" action="/uncomplete_todo/{{todo['id']}}">
+                        <form method="POST" action="/uncomplete_todo/{{todo['id']}}" class="completed">
                             <input type="submit" value="Uncomplete" class="orange-button">
                         </form>
                         {%endif%}
@@ -163,11 +167,9 @@
                         {%if todo['complete'] %}{%endif%}
             {%endfor%}
         </ul>
-        <form method="post">
-            <input name = "new_todo" class="fancy-input-button">
-            <div class="button-container">
+        <form method="post" class="button-container">
+            <input name = "new_todo" class="fancy-input-button" placeholder="Insert To Do Here">
                 <input type="submit" class="submit">
-            </div>
         </form>
     </body>
 </html>
